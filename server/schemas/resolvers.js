@@ -1,4 +1,4 @@
-const { BookFilm } = require('../models');
+const { BookFilms } = require('../models');
 
 // TODO: When ready to implement Auth and user management
 // const { AuthenticationError } = require('apollo-server-express');
@@ -13,7 +13,7 @@ const resolvers = {
             return { error: "Not implemented yet" };
         },
         bookFilms: async() => {
-            return [{ book: "Error: Not implemented yet", film: "Error: Not implemented yet" }];
+            return await BookFilms.find({}).select("-__v");
         }
     }
 };
