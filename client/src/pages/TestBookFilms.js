@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Figure } from 'react-bootstrap';
-
-import Auth from '../utils/auth';
-import { saveBook, searchGoogleBooks } from '../utils/API';
-import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
+import React from 'react';
+// import React, { useState, useEffect } from 'react';
+import { Container, Card, CardColumns, Figure } from 'react-bootstrap';
 
 import { useQuery } from '@apollo/react-hooks'; // TO REVIEW
 import { QUERY_FILM_ADAPTATIONS } from '../utils/queries';
 
 // Test GraphQL without ApolloProvider initially. Comment off once I implement ApolloProvider
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 const TestBookFilms = () => {
 
@@ -45,25 +42,14 @@ const TestBookFilms = () => {
 
 
     // use useQuery hook to make query request
-    const { loading, bookFilms } = useQuery(QUERY_FILM_ADAPTATIONS);
+    const { loading, data } = useQuery(QUERY_FILM_ADAPTATIONS);
+    const bookFilms = data?.bookFilms || [];
 
     return (<React.Fragment>
       {loading?(
         <div>Loading...</div>
       ) : (
-        <div>Loaded</div>
-      )
-      }
-      </React.Fragment>);
-};
-
-export default TestBookFilms;
-
-/**
- * 
- * TODO: Below is the GraphQL-Fetch code. Will convert to ApolloProvider code
-    return ( 
-      <Container>
+        <Container>
         <h2>
           {bookFilms.length
             ? `Viewing ${bookFilms.length} film adaptations:`
@@ -87,5 +73,9 @@ export default TestBookFilms;
           })}
         </CardColumns>
       </Container>
-    );
- */
+      )
+      }
+      </React.Fragment>);
+};
+
+export default TestBookFilms;
