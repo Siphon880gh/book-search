@@ -16,28 +16,6 @@ const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {savedBooks:[]};
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-        if (!token) {
-          userData = {savedBooks:[]}
-          return false;
-        }
-
-        // const response = await getMe(token);
-        // const user = await response.json();
-        // setUserData(user);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    getUserData();
-  }, []);
-
-
   const [ removeBook_mutator ] = useMutation(REMOVE_BOOK);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -50,8 +28,9 @@ const SavedBooks = () => {
 
     try {
       // const response = await deleteBook(bookId, token);
+      // debugger;
       const response = await removeBook_mutator({
-        variables: bookId
+        variables: {bookId}
       });
 
       if (!response.data) {
