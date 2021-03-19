@@ -17,6 +17,23 @@ mutation saveBook($authors: [String], $description: String!, $title: String!, $b
   }
 }`;
 
+export const REMOVE_BOOK = gql`
+mutation removeBook($bookId: String!) {
+  removeBook(bookId: $bookId) {
+    _id,
+    username,
+    email,
+    savedBooks {
+      authors
+      description
+      title
+      bookId
+      image
+      link
+    }
+  }
+}`;
+
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {

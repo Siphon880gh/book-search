@@ -48,6 +48,10 @@ const resolvers = {
             return { token, user };
         },
         saveBook: async(parent, args, context) => {
+            // Testable:
+            // Switch comment on/of depending on if you are testing in graphQL playground where you don't want a logged in user. 
+            // Then it'd use the seed user "test"
+
             // if (true ) {
             if ( context.user) {
                 const book = args; // {authors:.., description:.., title:.., bookId:.., image:.., link:..}
@@ -58,18 +62,42 @@ const resolvers = {
             }
 
             throw new AuthenticationError('You need to be logged in!');
-        }
-    }
-};
+        }, // saveBook
 
-// TODO: When ready to implement users' book management
-const resolvers__BookManagement = {
-
-    Mutation: {
         removeBook: async(parent, args, context) => {
-            return { error: "Not implemented yet" };
-        }
-    }
-}
+            // Testable:
+            // Switch comment on/of depending on if you are testing in graphQL playground where you don't want a logged in user. 
+            // Then it'd use the seed user "test"
+
+            // if (true ) {
+            if ( context.user) {
+                const {bookId} = args; // {authors:.., description:.., title:.., bookId:.., image:.., link:..}
+
+                // const updatedUser = await User.findOneAndUpdate({ username: "test" }, 
+                // { 
+                //     $pull: {
+                //         savedBooks: {
+                //             bookId
+                //         }
+                //     } 
+                // }, { new: true });
+                // return updatedUser;
+
+                const updatedUser = await User.findByIdAndUpdate({ _id: context.user._id }, 
+                { 
+                    $pull: {
+                        savedBooks: {
+                            bookId
+                        }
+                    } 
+                }, { new: true });
+                return updatedUser;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+
+        } // removeBook
+
+    } // Mutation
+};
 
 module.exports = resolvers;
