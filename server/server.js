@@ -5,13 +5,14 @@ const { ApolloServer } = require('apollo-server-express'); // Apollo has server 
 const path = require('path');
 
 // Server dependencies
+const db = require('./config/connection');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
-const db = require('./config/connection');
 
 // Server
 const PORT = process.env.PORT || 3001;
 const app = express();
+
 // - Apollo server library
 const server = new ApolloServer({
     typeDefs,
@@ -19,20 +20,22 @@ const server = new ApolloServer({
     // context: authMiddleware // TODO: When Auth
 });
 
-// server.applyMiddleware({ app }); // TODO: When Auth
+server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Serve client/build as static assets if we're in production
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
-}
+console.log("MODE:" + process.env.NODE_ENV);
 
-// Other URIs serve the frontend homepage
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+// Serve client/build as static assets if we're in production
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, '../client/build')));
+// }
+
+// // Other URIs serve the frontend homepage
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
 db.once('open', () => {
     app.listen(PORT, () => {
