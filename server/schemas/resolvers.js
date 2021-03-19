@@ -15,6 +15,12 @@ const resolvers = {
     },
 
     Mutation: {
+        addUser: async (parent, args) => {
+          const user = await User.create(args);
+          const token = signToken(user);
+    
+          return { token, user };
+        },
         login: async(parent, { email, password }) => {
 
             // Find if email exists
@@ -49,15 +55,6 @@ const resolvers = {
         }
     }
 };
-
-// TODO: When ready to implement Auth and user management
-const resolvers__Auth_User = {
-    Mutation: {
-        addUser: async(parent, args) => {
-            return { error: "Not implemented yet" };
-        }
-    }
-}
 
 // TODO: When ready to implement users' book management
 const resolvers__BookManagement = {
