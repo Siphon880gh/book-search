@@ -13,8 +13,8 @@ const resolvers = {
 
             // if(true) {
             if (context.user) {
-                // const foundUser = await (await User.findOne({ username: "test" })).select("-password -savedBooks -bookCount");
-                const foundUser = await (await User.findOne({ _id: context.user._id })).select("-password -savedBooks -bookCount");
+                // const foundUser = await User.findOne({ username: "test" }).select("-password");
+                const foundUser = await User.findOne({ _id: context.user._id }).select("-password");
                 return foundUser;
             }
 
