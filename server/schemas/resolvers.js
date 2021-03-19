@@ -7,11 +7,13 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         me: async(parent, args, context) => {
-            if (context.user) {
-                // const user = await Thought.create({...args, username: context.user.username });
-                // console.log("* ARGS: " + args);
-                // console.log("* CONTEXT: " + context);
+            // Testable:
+            // Switch comment on/of depending on if you are testing in graphQL playground where you don't want a logged in user. 
+            // Then it'd use the seed user "test"
 
+            // if(true) {
+            if (context.user) {
+                // const foundUser = await (await User.findOne({ username: "test" })).select("-password -savedBooks -bookCount");
                 const foundUser = await (await User.findOne({ _id: context.user._id })).select("-password -savedBooks -bookCount");
                 return foundUser;
             }
@@ -56,8 +58,8 @@ const resolvers = {
             if ( context.user) {
                 const book = args; // {authors:.., description:.., title:.., bookId:.., image:.., link:..}
 
-                // const updatedUser = await User.findOneAndUpdate({ username: "test" }, { $push: { savedBooks: book } }, { new: true });
-                const updatedUser = await User.findByIdAndUpdate({ _id: context.user._id }, { $push: { savedBooks: book } }, { new: true });
+                // const updatedUser = await User.findOneAndUpdate({ username: "test" }, { $addToSet: { savedBooks: book } }, { new: true });
+                const updatedUser = await User.findByIdAndUpdate({ _id: context.user._id }, { $addToSet: { savedBooks: book } }, { new: true });
                 return updatedUser;
             }
 

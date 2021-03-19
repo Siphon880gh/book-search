@@ -77,7 +77,7 @@ const SearchBooks = () => {
         variables: bookToSave
       });
 
-      if (!response.ok) {
+      if (!response.data) {
         throw new Error('something went wrong!');
       }
 

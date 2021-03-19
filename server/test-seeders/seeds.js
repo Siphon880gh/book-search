@@ -70,7 +70,10 @@ query {
         book
         film
     }
-}`;
+}
+
+Also, all users removed. Recreated user "test" with no saved books.
+`;
 
     console.info(printf('%sBookFilms all seeded for testing purposes! Run in GraphQL playground: %s'), bgGreen, queryHint, colorReset);
     process.exit(0);
