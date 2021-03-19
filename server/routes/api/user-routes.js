@@ -11,7 +11,8 @@ const { authMiddleware } = require('../../utils/auth');
 // authMiddleware sends a token for verification of user
 // 2. save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
 // user comes from `req.user` created in the auth middleware function
-router.route('/').post(async(req, res) => {
+router.route('/')
+.post(async(req, res) => { // POST api/users/
     const { body } = req
     const user = await User.create(body);
 
@@ -20,7 +21,7 @@ router.route('/').post(async(req, res) => {
     }
     const token = signToken(user);
     res.json({ token, user });
-}).put(authMiddleware, async(req, res) => {
+}).put(authMiddleware, async(req, res) => { // PUT api/users/
     const { user, body } = req;
     console.log(user);
     try {

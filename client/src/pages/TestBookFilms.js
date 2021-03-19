@@ -3,7 +3,7 @@ import React from 'react';
 import { Container, Card, CardColumns, Figure } from 'react-bootstrap';
 
 import { useQuery } from '@apollo/react-hooks'; // TO REVIEW
-import { QUERY_FILM_ADAPTATIONS } from '../utils/queries';
+import { QUERY_FILM_ADAPTATIONS } from '../utils/queries-mutations';
 
 // Test GraphQL without ApolloProvider initially. Comment off once I implement ApolloProvider
 // const fetch = require('node-fetch');
