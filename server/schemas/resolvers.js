@@ -50,8 +50,8 @@ const resolvers = {
         saveBook: async(parent, args, context) => {
             if (context.user) {
                 // const user = await Thought.create({...args, username: context.user.username });
-                // console.log("* ARGS: " + args);
-                // console.log("* CONTEXT: " + context);
+                console.log("* ARGS: " + args);
+                console.log("* CONTEXT: " + context);
 
                 const book = args; // {authors:.., description:.., title:.., bookId:.., image:.., link:..}
 
