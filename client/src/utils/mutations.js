@@ -1,13 +1,5 @@
 import gql from 'graphql-tag';
 
-export const QUERY_FILM_ADAPTATIONS = gql `
-query {
-  bookFilms {
-    book
-	  film
-  }
-}`;
-
 export const SAVE_BOOK = gql `
 mutation saveBook($authors: [String], $description: String!, $title: String!, $bookId: String!, $image: String!, $link: String!) {
   saveBook(authors: $authors, description: $description, title: $title, bookId: $bookId, image: $image, link: $link) {

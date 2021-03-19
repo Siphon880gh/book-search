@@ -7,7 +7,16 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         me: async(parent, args, context) => {
-            return { error: "Not implemented yet" };
+            if (context.user) {
+                // const user = await Thought.create({...args, username: context.user.username });
+                // console.log("* ARGS: " + args);
+                // console.log("* CONTEXT: " + context);
+
+                const foundUser = await (await User.findOne({ _id: context.user._id })).select("-password -savedBooks -bookCount");
+                return foundUser;
+            }
+
+            throw new AuthenticationError('You need to be logged in!');
         },
         bookFilms: async() => {
             return await BookFilms.find({}).select("-__v");
@@ -41,8 +50,8 @@ const resolvers = {
         saveBook: async(parent, args, context) => {
             if (context.user) {
                 // const user = await Thought.create({...args, username: context.user.username });
-                console.log("* ARGS: " + args);
-                console.log("* CONTEXT: " + context);
+                // console.log("* ARGS: " + args);
+                // console.log("* CONTEXT: " + context);
 
                 const book = args; // {authors:.., description:.., title:.., bookId:.., image:.., link:..}
 

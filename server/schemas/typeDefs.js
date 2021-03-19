@@ -41,6 +41,7 @@ const typeDefs = gql `
   }
 `;
 
+
 // TODO: When ready to implement users' book management
 const typeDefs__BookManagement = gql `
   type Mutation {
