@@ -5,42 +5,63 @@ import Auth from '../utils/auth';
 import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
-// Test GraphQL without ApolloProvider. Comment off once you implement ApolloProvider
+import { useQuery } from '@apollo/react-hooks'; // TO REVIEW
+import { QUERY_FILM_ADAPTATIONS } from '../utils/queries';
+
+// Test GraphQL without ApolloProvider initially. Comment off once I implement ApolloProvider
 const fetch = require('node-fetch');
 
 const TestBookFilms = () => {
-    // create state for holding book film adaptations
-    const [bookFilms, setBookFilms] = useState([]);
 
-    // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
-    // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
-    useEffect(() => {
+    /* 
+     * @hook
+     * Test GraphQL without ApolloProvider initially
+     * Comment off state and useEffect once I implement ApolloProvider
+     * Side effet: The useEffect hook does not accept async fxns, so as a consequence, I use IIFE
+     */ 
+    // const [bookFilms, setBookFilms] = useState([]);
+    // useEffect(() => {
+        // (async function() {
+        //     const retBookFilms = await fetch('http://localhost:3001/graphql', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Accept-Encoding': 'gzip, deflate, br',
+        //             'Content-Type': 'application/json',
+        //             'Accept': 'application/json',
+        //             'Connection': 'keep-alive',
+        //             'DNT': '1',
+        //             'Origin': 'http://localhost:3001'
+        //         },
+        //         body: JSON.stringify({ "query": "query {\n bookFilms {\n book\n\t\tfilm\n }\n}" })
+        //     }).then(res => res.json()).then(data => { return data });
 
-        // Comment off once you implement ApolloProvider
-        // useEffect does not accept async fxns, so as a consequence, you use IIFE
-        (async function() {
+        //     if (retBookFilms) {
+        //         let { bookFilms } = retBookFilms.data;
+        //         setBookFilms(bookFilms);
 
-            const retBookFilms = await fetch('http://localhost:3001/graphql', {
-                method: 'POST',
-                headers: {
-                    'Accept-Encoding': 'gzip, deflate, br',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Connection': 'keep-alive',
-                    'DNT': '1',
-                    'Origin': 'http://localhost:3001'
-                },
-                body: JSON.stringify({ "query": "query {\n bookFilms {\n book\n\t\tfilm\n }\n}" })
-            }).then(res => res.json()).then(data => { return data });
+        //     }
+        // })(); // IIFE
+    // }, []); // useEffect
 
-            if (retBookFilms) {
-                let { bookFilms } = retBookFilms.data;
-                setBookFilms(bookFilms);
 
-            }
-        })();
-    }, []); // useEffect
+    // use useQuery hook to make query request
+    const { loading, bookFilms } = useQuery(QUERY_FILM_ADAPTATIONS);
 
+    return (<React.Fragment>
+      {loading?(
+        <div>Loading...</div>
+      ) : (
+        <div>Loaded</div>
+      )
+      }
+      </React.Fragment>);
+};
+
+export default TestBookFilms;
+
+/**
+ * 
+ * TODO: Below is the GraphQL-Fetch code. Will convert to ApolloProvider code
     return ( 
       <Container>
         <h2>
@@ -67,6 +88,4 @@ const TestBookFilms = () => {
         </CardColumns>
       </Container>
     );
-};
-
-export default TestBookFilms;
+ */

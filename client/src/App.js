@@ -5,20 +5,33 @@ import SavedBooks from './pages/SavedBooks';
 import TestBookFilms from './pages/TestBookFilms';
 import Navbar from './components/Navbar';
 
+// Add Apollo context components
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
+const client = new ApolloClient({
+  uri: '/graphql'
+});
+
+
 function App() {
   return (
-    <Router>
-      <>
-        <Navbar />
-        <Switch>
-          <Route exact path='/' component={SearchBooks} />
-          <Route exact path='/test' component={TestBookFilms} />
-          <Route exact path='/saved' component={SavedBooks} />
-          <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
-        </Switch>
-      </>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <>
+          <Navbar />
+          <Switch>
+            <Route exact path='/' component={SearchBooks} />
+            <Route exact path='/test' component={TestBookFilms} />
+            <Route exact path='/saved' component={SavedBooks} />
+            <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+          </Switch>
+        </>
+      </Router>
+    </ApolloProvider>
   );
 }
 
 export default App;
+
+
+
