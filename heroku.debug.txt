@@ -1,0 +1,100 @@
+2021-03-19T11:05:08.730406+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=book-search-wff.herokuapp.com request_id=e8a7e843-93de-48ad-927a-9934859de984 fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:06:23.640283+00:00 app[api]: Starting process with command `bash` by user weffung@ucdavis.edu
+2021-03-19T11:06:37.585733+00:00 heroku[run.3757]: State changed from starting to up
+2021-03-19T11:06:37.894896+00:00 heroku[run.3757]: Awaiting client
+2021-03-19T11:06:37.924472+00:00 heroku[run.3757]: Starting process with command `bash`
+2021-03-19T11:08:07.692120+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=book-search-wff.herokuapp.com request_id=8472844a-8d0d-44c7-9d91-7089c9dcafd6 fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:08:08.043820+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=book-search-wff.herokuapp.com request_id=23872491-e242-4e11-823c-62a4e18fa54d fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:08:56.975870+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=book-search-wff.herokuapp.com request_id=903b5d65-9004-4f7b-8d31-3af9269442f9 fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:08:57.355657+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=book-search-wff.herokuapp.com request_id=10ed7454-6e49-4667-9d2a-cfe45959979e fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:08:58.513202+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=book-search-wff.herokuapp.com request_id=c1d9cb02-4ce8-4617-a048-5d4afdf190b4 fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:08:58.864129+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=book-search-wff.herokuapp.com request_id=78e59c00-9d23-4b5d-898e-46e5148bc4ea fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:10:22.000208+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=book-search-wff.herokuapp.com request_id=aba34f90-ff17-4a34-89ba-77fceb347eb3 fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:10:22.395884+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=book-search-wff.herokuapp.com request_id=425922c6-fcd1-4e0a-a829-020dfe7f11dd fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:10:23.039240+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=book-search-wff.herokuapp.com request_id=d6b9a3d1-4bfa-40fb-9d91-fee8b669845c fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:10:23.374282+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=book-search-wff.herokuapp.com request_id=e1eb9d50-fdb8-4e62-9fab-916ce7907704 fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:10:39.958879+00:00 heroku[run.3757]: Process exited with status 130
+2021-03-19T11:10:40.028511+00:00 heroku[run.3757]: State changed from up to complete
+2021-03-19T11:11:02.723509+00:00 app[api]: Starting process with command `bash` by user weffung@ucdavis.edu
+2021-03-19T11:11:21.896420+00:00 heroku[run.8543]: State changed from starting to up
+2021-03-19T11:11:22.245073+00:00 heroku[run.8543]: Awaiting client
+2021-03-19T11:11:22.292158+00:00 heroku[run.8543]: Starting process with command `bash`
+2021-03-19T11:12:50.000000+00:00 app[api]: Build started by user weffung@ucdavis.edu
+2021-03-19T11:15:05.755961+00:00 app[api]: Deploy 24229765 by user weffung@ucdavis.edu
+2021-03-19T11:15:05.755961+00:00 app[api]: Release v4 created by user weffung@ucdavis.edu
+2021-03-19T11:15:06.170027+00:00 heroku[web.1]: State changed from crashed to starting
+2021-03-19T11:15:07.000000+00:00 app[api]: Build succeeded
+2021-03-19T11:15:18.043485+00:00 heroku[web.1]: Starting process with command `npm start`
+2021-03-19T11:15:20.473502+00:00 app[web.1]: 
+2021-03-19T11:15:20.473526+00:00 app[web.1]: > googlebooks-app@1.0.0 start /app
+2021-03-19T11:15:20.473528+00:00 app[web.1]: > if-env NODE_ENV=production && npm run start:prod || npm run start:dev
+2021-03-19T11:15:20.473528+00:00 app[web.1]: 
+2021-03-19T11:15:20.853848+00:00 app[web.1]: 
+2021-03-19T11:15:20.853860+00:00 app[web.1]: > googlebooks-app@1.0.0 start:prod /app
+2021-03-19T11:15:20.853862+00:00 app[web.1]: > cd server && npm start
+2021-03-19T11:15:20.853862+00:00 app[web.1]: 
+2021-03-19T11:15:21.197353+00:00 app[web.1]: 
+2021-03-19T11:15:21.197367+00:00 app[web.1]: > server@1.0.0 start /app/server
+2021-03-19T11:15:21.197368+00:00 app[web.1]: > node server.js
+2021-03-19T11:15:21.197368+00:00 app[web.1]: 
+2021-03-19T11:15:22.058569+00:00 app[web.1]: MODE:production
+2021-03-19T11:15:51.911967+00:00 app[web.1]: (node:52) UnhandledPromiseRejectionWarning: MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017
+2021-03-19T11:15:51.911991+00:00 app[web.1]: at NativeConnection.Connection.openUri (/app/server/node_modules/mongoose/lib/connection.js:839:32)
+2021-03-19T11:15:51.911993+00:00 app[web.1]: at /app/server/node_modules/mongoose/lib/index.js:348:10
+2021-03-19T11:15:51.911994+00:00 app[web.1]: at /app/server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:5
+2021-03-19T11:15:51.911995+00:00 app[web.1]: at new Promise (<anonymous>)
+2021-03-19T11:15:51.911995+00:00 app[web.1]: at promiseOrCallback (/app/server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:30:10)
+2021-03-19T11:15:51.911996+00:00 app[web.1]: at Mongoose._promiseOrCallback (/app/server/node_modules/mongoose/lib/index.js:1149:10)
+2021-03-19T11:15:51.911997+00:00 app[web.1]: at Mongoose.connect (/app/server/node_modules/mongoose/lib/index.js:347:20)
+2021-03-19T11:15:51.911997+00:00 app[web.1]: at Object.<anonymous> (/app/server/config/connection.js:3:10)
+2021-03-19T11:15:51.911998+00:00 app[web.1]: at Module._compile (internal/modules/cjs/loader.js:1063:30)
+2021-03-19T11:15:51.911998+00:00 app[web.1]: at Object.Module._extensions..js (internal/modules/cjs/loader.js:1092:10)
+2021-03-19T11:15:51.911999+00:00 app[web.1]: at Module.load (internal/modules/cjs/loader.js:928:32)
+2021-03-19T11:15:51.911999+00:00 app[web.1]: at Function.Module._load (internal/modules/cjs/loader.js:769:14)
+2021-03-19T11:15:51.911999+00:00 app[web.1]: at Module.require (internal/modules/cjs/loader.js:952:19)
+2021-03-19T11:15:51.912000+00:00 app[web.1]: at require (internal/modules/cjs/helpers.js:88:18)
+2021-03-19T11:15:51.912000+00:00 app[web.1]: at Object.<anonymous> (/app/server/server.js:8:12)
+2021-03-19T11:15:51.912000+00:00 app[web.1]: at Module._compile (internal/modules/cjs/loader.js:1063:30)
+2021-03-19T11:15:51.912001+00:00 app[web.1]: (Use `node --trace-warnings ...` to show where the warning was created)
+2021-03-19T11:15:51.912058+00:00 app[web.1]: (node:52) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+2021-03-19T11:15:51.912126+00:00 app[web.1]: (node:52) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+2021-03-19T11:15:52.019920+00:00 heroku[web.1]: Process exited with status 0
+2021-03-19T11:15:52.090191+00:00 heroku[web.1]: State changed from starting to crashed
+2021-03-19T11:15:52.093811+00:00 heroku[web.1]: State changed from crashed to starting
+2021-03-19T11:16:04.042164+00:00 heroku[web.1]: Starting process with command `npm start`
+2021-03-19T11:16:06.496175+00:00 app[web.1]: 
+2021-03-19T11:16:06.496193+00:00 app[web.1]: > googlebooks-app@1.0.0 start /app
+2021-03-19T11:16:06.496194+00:00 app[web.1]: > if-env NODE_ENV=production && npm run start:prod || npm run start:dev
+2021-03-19T11:16:06.496195+00:00 app[web.1]: 
+2021-03-19T11:16:07.065943+00:00 app[web.1]: 
+2021-03-19T11:16:07.065977+00:00 app[web.1]: > googlebooks-app@1.0.0 start:prod /app
+2021-03-19T11:16:07.065978+00:00 app[web.1]: > cd server && npm start
+2021-03-19T11:16:07.065979+00:00 app[web.1]: 
+2021-03-19T11:16:07.389452+00:00 app[web.1]: 
+2021-03-19T11:16:07.389487+00:00 app[web.1]: > server@1.0.0 start /app/server
+2021-03-19T11:16:07.389488+00:00 app[web.1]: > node server.js
+2021-03-19T11:16:07.389488+00:00 app[web.1]: 
+2021-03-19T11:16:08.289234+00:00 app[web.1]: MODE:production
+2021-03-19T11:16:27.022112+00:00 heroku[router]: at=error code=H20 desc="App boot timeout" method=GET path="/" host=book-search-wff.herokuapp.com request_id=217b3f26-3b3c-41f2-897b-5534a661164b fwd="96.41.115.201" dyno= connect= service= status=503 bytes= protocol=https
+2021-03-19T11:16:38.141372+00:00 app[web.1]: (node:52) UnhandledPromiseRejectionWarning: MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017
+2021-03-19T11:16:38.141407+00:00 app[web.1]: at NativeConnection.Connection.openUri (/app/server/node_modules/mongoose/lib/connection.js:839:32)
+2021-03-19T11:16:38.141409+00:00 app[web.1]: at /app/server/node_modules/mongoose/lib/index.js:348:10
+2021-03-19T11:16:38.141410+00:00 app[web.1]: at /app/server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:5
+2021-03-19T11:16:38.141410+00:00 app[web.1]: at new Promise (<anonymous>)
+2021-03-19T11:16:38.141411+00:00 app[web.1]: at promiseOrCallback (/app/server/node_modules/mongoose/lib/helpers/promiseOrCallback.js:30:10)
+2021-03-19T11:16:38.141412+00:00 app[web.1]: at Mongoose._promiseOrCallback (/app/server/node_modules/mongoose/lib/index.js:1149:10)
+2021-03-19T11:16:38.141412+00:00 app[web.1]: at Mongoose.connect (/app/server/node_modules/mongoose/lib/index.js:347:20)
+2021-03-19T11:16:38.141412+00:00 app[web.1]: at Object.<anonymous> (/app/server/config/connection.js:3:10)
+2021-03-19T11:16:38.141413+00:00 app[web.1]: at Module._compile (internal/modules/cjs/loader.js:1063:30)
+2021-03-19T11:16:38.141413+00:00 app[web.1]: at Object.Module._extensions..js (internal/modules/cjs/loader.js:1092:10)
+2021-03-19T11:16:38.141413+00:00 app[web.1]: at Module.load (internal/modules/cjs/loader.js:928:32)
+2021-03-19T11:16:38.141413+00:00 app[web.1]: at Function.Module._load (internal/modules/cjs/loader.js:769:14)
+2021-03-19T11:16:38.141414+00:00 app[web.1]: at Module.require (internal/modules/cjs/loader.js:952:19)
+2021-03-19T11:16:38.141414+00:00 app[web.1]: at require (internal/modules/cjs/helpers.js:88:18)
+2021-03-19T11:16:38.141414+00:00 app[web.1]: at Object.<anonymous> (/app/server/server.js:8:12)
+2021-03-19T11:16:38.141415+00:00 app[web.1]: at Module._compile (internal/modules/cjs/loader.js:1063:30)
+2021-03-19T11:16:38.141415+00:00 app[web.1]: (Use `node --trace-warnings ...` to show where the warning was created)
+2021-03-19T11:16:38.141476+00:00 app[web.1]: (node:52) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+2021-03-19T11:16:38.141539+00:00 app[web.1]: (node:52) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+2021-03-19T11:16:38.212192+00:00 heroku[web.1]: Process exited with status 0
+2021-03-19T11:16:38.410279+00:00 heroku[web.1]: State changed from starting to crashed
