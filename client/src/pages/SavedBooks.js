@@ -46,12 +46,9 @@ const SavedBooks = () => {
     }
   };
 
-  // if data isn't here yet, say so
-  // if (!userDataLength) {
-  //   return <h2>LOADING...</h2>;
-  // }
-
-
+  const visitLink = (link) => {
+    window.location.href = link;
+  }
 
   return (<React.Fragment>
     {loading?(
@@ -74,9 +71,9 @@ const SavedBooks = () => {
             {userData.savedBooks.map((book) => {
               return (
                 <Card key={book.bookId} border='dark'>
-                  {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
+                  {book.image ? <Card.Img className="clickable" src={book.image} alt={`The cover for ${book.title}`} variant='top' onClick={()=> visitLink(book.link)}/> : null}
                   <Card.Body>
-                    <Card.Title>{book.title}</Card.Title>
+                    <Card.Title className="clickable" onClick={()=> visitLink(book.link)}>{book.title}</Card.Title>
                     <p className='small'>Authors: {book.authors}</p>
                     <Card.Text>{book.description}</Card.Text>
                     <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
