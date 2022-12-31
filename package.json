@@ -9,7 +9,7 @@
         "prod": "export NODE_ENV=production",
         "start:prod": "cd server && npm start",
         "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-        "install": "cd server && npm i && cd ../client && npm i",
+        "install": "cd server && npm install --legacy-peer-deps && cd ../client && npm install --legacy-peer-deps",
         "heroku-postbuild": "cd client && npm run build",
         "seed": "cd server && npm run seed"
     },

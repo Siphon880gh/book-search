@@ -18,7 +18,7 @@ query {
 }`;
 
 export const QUERY_FILM_ADAPTATIONS = gql`
-query {
+query bookfilmie {
   bookFilms {
     book
 	  film
