@@ -23,9 +23,11 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const basepath = process.env.REACT_APP_REACT_ROUTER_BASEPATH || '/';
+
   return (
     <ApolloProvider client={client}>
-      <Router>
+      <Router basename={basepath}>
         <>
           <Navbar />
           <Switch>
