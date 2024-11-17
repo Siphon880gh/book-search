@@ -4,7 +4,7 @@
     "description": "",
     "main": "server/server.js",
     "scripts": {
-        "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+        "start": "export NODE_OPTIONS=--openssl-legacy-provider && if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
         "dev": "export NODE_ENV=development",
         "prod": "export NODE_ENV=production",
         "start:prod": "cd server && npm start",
@@ -21,8 +21,9 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "concurrently": "^5.2.0",
+        "dotenv": "^16.4.5",
         "graphql": "^15.5.0",
-        "if-env": "^1.0.4",
-        "concurrently": "^5.2.0"
+        "if-env": "^1.0.4"
     }
 }
