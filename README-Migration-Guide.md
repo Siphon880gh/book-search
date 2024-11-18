@@ -7,21 +7,21 @@ Database: Adjust the MONGODB_URI at the .env file for authenticating and accessi
 Ports: This CRA needs its own unique port so it won't conflict with your other CRA apps on this same server. This GraphQL also needs its own unique port from other GraphQL apps on this same server. Relatedly, GraphQL also needs its own unique api endpoint url from other GraphQL's on this same server. More on this at the next section.
 
 Base URL - Here's how you replace the baseURL for this app:
-- grep for `/app/book-search/` and replace with your new baseURL. Or you may use sed to match and replace.
+- Run grep for `/app/book-search/` and replace with your new baseURL. Or you may use sed to match and replace.
 - Adjust proper base path for React Router's `<Router basename={..}>`. Namely, `client/.env`'s:
 ```
 REACT_APP_REACT_ROUTER_BASEPATH=`/app/book-search`
 ```
+- Run grep for `/app/book-search` and replace with your new baseURL. Or you may use sed to match and replace.
 
- `/app/book-search` and replace with your new baseURL. Or you may use sed to match and replace.
-
-Reverse Proxies: 
+Reverse Proxies:
 - `/app/book-search[/]*` proxy passes to `127.0.0.1:PORT_GRAPHQL` where PORT_GRAPHQL is the unique Express-serving-GraphQL port.
 - `/graphql-book-search[/]*` proxy passes to `127.0.0.1:PORT_GRAPHQL` where PORT_GRAPHQL is the unique Express-serving-GraphQL port.
 - Note that both the app link and the graphql endpoint goes to the same port because you're not splitting the app into a hot reload development preview port AND an express-graphql server port when you're going online.
 
 - Note the reverse proxy is standard for the app asset and api delivery but there are special headers for the graphql api endpoint:
 
+Eg.
 ```
 # Reverse proxy 1/2
   location ~ /app/book-search[/]* {
