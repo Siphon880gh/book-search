@@ -33,11 +33,9 @@ console.log("MODE:" + process.env.NODE_ENV);
 // Serve client/build as static assets if we're in production
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
-} else {
-    app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-// // Other URIs serve the frontend homepage
+// Other URIs serve the frontend homepage
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });

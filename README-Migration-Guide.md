@@ -8,10 +8,6 @@ Ports: This CRA needs its own unique port so it won't conflict with your other C
 
 Base URL - Here's how you replace the baseURL for this app:
 - Run grep for `/app/book-search/` and replace with your new baseURL. Or you may use sed to match and replace.
-- Adjust proper base path for React Router's `<Router basename={..}>`. Namely, `client/.env`'s:
-```
-REACT_APP_REACT_ROUTER_BASEPATH=`/app/book-search`
-```
 - Run grep for `/app/book-search` and replace with your new baseURL. Or you may use sed to match and replace.
 
 Reverse Proxies:
@@ -70,39 +66,53 @@ Start script at remote server:
 
 CRA React Port, GraphQL Port, Graphql API Endpoint
 
-For having multiple react graphql apps running on the same server and/or having reverse proxy, you need to be discretionary with the port numbers so that you dont use another port number that’s been used by another app on your server. And you have to be discretionary with the /graphql endpoint that frontend apps actually hit to perform CRUD via express-graphql because of nginx vhost reverse proxy location matching, so you dont have multiple apps using the same /graphql  endpoint.
+Say you have a full stack app and the file structure is mostly:
+- ./client which uses cra react and its own package.json
+- ./server which uses graphql, minimum express endpoints, and its own package.json
+- package.json at the root folder
 
-Btw, that graphql port is really the express port because express is requesting/responding to the same graphql endpoint, but it’s really the payload and the response that are following a strict structure.
+For having multiple react graphql apps running on the same server and/or having reverse proxy, you need to be discretionary with the port numbers so that you don't use a port number that’s being used by another app on your server. And you have to be discretionary with the /graphql api endpoint that the frontend apps actually hit to perform CRUD because of nginx vhost reverse proxy location matching needing to proxy pass to the graphql port for your specific app.
 
-Review of why we reverse proxy: Aka proxy passing. You dont want someone to visit domain.tld:3001. Makes it harder to give a SSL, looks unprofessional, and gives hackers another port to target. You can hide it behind domain.tld/app/app1 or domain.tld/app1/api, for example
+Btw, that graphql port is really the express port because express is requesting/responding to the same graphql api endpoint, but it’s really the payload and the response that are following a strict structure.
 
-Say the file structure for the most part is:
-./client which uses cra react and its own package.json
-./server which uses graphql, minimum express endpoints, and its own package.json
-package.json at the root folder
+<!-- Review of why we reverse proxy: Aka proxy passing. You dont want someone to visit domain.tld:3001. Makes it harder to give a SSL, looks unprofessional, and gives hackers another port to target. You can hide it behind domain.tld/app/app1 or domain.tld/app1/api, for example -->
 
-If you have multiple react apps and graphql apps, you have to manage the react development port and graphql port AND graphql url (assign a custom endpoint other than the default /graphql )
+For graphql, you may need to assign a discretionary PORT at server/server.js. To streamline managing multiple graphql apps, you can assign a PORT_GRAPHQL at the root .env file (outside of server/ folder), then have your `server/server.js` ‘s dotenv process can go up a folder into the root to look into the .env:
 
-Optional steps? Some of the steps, particularly modifying the cra react port are optional because that port is only for previewing the react app that hot reload when you edit your code. On actual production server, you’re only running server/server.js which serves the built version of the cra react app at /client/build/ which required you have to have npm run build  inside the client folder. In other words, at the production server, you’re actually only running the server/server.js port instead of simultaneously running the cra react development hot reload port as well.
-
-Optional: at cra client/, it by default assigns 3000 or a higher number, but you should pre-assign a  port at client/.env  with PORT=3002 , for example. This seems like a very generic convention using PORT as the variable but unfortunately CRA has chosen it. The .env file must be at the same level where the package.json for cra is at and the variable must be PORT , so that file could be at client/.env with the line PORT=3002 , for example.
-
-For graphql, you may need to assign a discretionary PORT at server/server.js . To streamline managing multiple graphql apps, you can assign a PORT_GRAPHQL  at the root .env  file (outside of server/ folder) while your server/server.js ‘s dotenv process can go up a folder into the root to look into the .env:
+server/server.js:
+```
 require('dotenv').config({ path: '../.env' });
 
-//...
+const PORT = process.env.PORT_GRAPHQL || 3003;
+```
 
-const PORT = process.env.PORT_GRAPHQL || 3001;
+root .env (outside of server/ and client/):
+```
+PORT_GRAPHQL: 3003
+```
 
-Optional: And your cra frontend needs to proxy into that GraphQL server port, otherwise the browser will block by CORS. CRA reads package.json for proxy, so your client/package.json  could have "proxy": "http://localhost:3003". This is an optional step because in production server, you’re actually only running the server/server.js port instead of simultaneously running the cra react development hot reload port previewing as well, and the website files from `client/build` are being delivered from the same server port so no need for proxying.
+Use an appropriate port number (which doesn't clash with your other express or graphql ports that are running for other apps on the same server). 3003 here is an example.
 
-You need to be discriminating on the /graphql api endpoint at both the cra frontend AND at the server.js.. make sure they both match though:
+Your server/server.js will have express listen at this port and have express sets up the graphql api endpoint to send/receive through Express into the GraphQL system:
+```
+    app.listen(PORT_GRAPHQL, () => {
+        console.log(`API server running on port ${PORT_GRAPHQL}!`);
+        console.log(`Use GraphQL at http://localhost:${PORT_GRAPHQL}${server.graphqlPath}`);
+    });
+```
+
+
+Now you need to be discriminating on the /graphql api endpoint at both the cra frontend AND at the server.js.. make sure they both match though:
+
 server/server.js:
+```
 // Set a custom GraphQL path for this server
 // server.applyMiddleware({ app });
-server.applyMiddleware({ app, path: '/graphql-book-search' });
+server.applyMiddleware({ app, path: '/graphql-image-gallery-nft-collab' });
+```
 
-client/src/App.js:
+client/src/App.js - Refer to uri:
+```
 const client = new ApolloClient({
   request: operation => {
     const token = localStorage.getItem('id_token');
@@ -114,19 +124,20 @@ const client = new ApolloClient({
     });
   },
   // uri: '/graphql'
-  uri: '/graphql-book-search'
+  uri: '/graphql-image-gallery-nft-collab'
 });
+```
 
+Let's work on the frontend.
 
-The files needed and modified are:
-.env
-clients/.env
-clients/package.json
-clients/src/App.js
-server/server.js
+Optional steps? Some of the steps, modifying the CRA React port is optional because that port is only for previewing the react app that hot reload when you edit your code. On actual production server, you’re only running server/server.js which serves the built version of the cra react app at /client/build/ which required you have to have npm run build  inside the client folder. In other words, at the production server, you’re actually only running the server/server.js port instead of simultaneously running the cra react development hot reload port as well.
+- Optional: At cra client/, it by default assigns 3000 or a higher number for the hot reload preview in the web browser, but you could pre-assign a port at client/.env with PORT=3002, for example. This seems like a very generic convention using PORT as the variable but unfortunately CRA has chosen it. So at client/.env file, you can have a line like PORT=3002.
+- Optional: And because the hot reload preview in the web browser is at a different port than the express+graphql port, when the frontend requests to the backend, there will be CORS errors. (FYI: This is NOT a problem in the production server when the express+graphql port deals with api requests as well as serving the frontend pages and its static assets from having ran the built script and accessing the client/build/ files). So at your `client/package.json`, you add `"proxy": "http://localhost:3003"` where the 3003 is replaced with your express+graphql port.
+
 
 React Router?
 When you run on the server, the npm run script needs to only run the server/server.js. when served, that built may have problems if there’s react routes. This is the solution:
+```
 function App() {
   const basepath = process.env.REACT_APP_REACT_ROUTER_BASEPATH || '/';
 
@@ -140,8 +151,54 @@ function App() {
     </Router>
   );
 }
-So you have to modify client/.env. Make sure to rebuild the client/build 
+```
+So then you have to modify client/.env. Make sure to rebuild the client/build 
 ^ Note the env variable name must be preceded REACT_APP_ . In a Create React App (CRA) project automatically brings in .env variables without the need to manually import dotenv. However, only variables prefixed with REACT_APP_ are included in the React app's build process.
 
+Your frontend will have to fetch and load static assets with the base url in mind. Otherwise you get this type of errors with a blank page when express delivers `client/build`:
+```
+GET https://wengindustries.com/static/css/2.896c4c41.chunk.css net::ERR_ABORTED 404 (Not Found)
+GET https://wengindustries.com/static/css/main.a5a0a511.chunk.css net::ERR_ABORTED 404 (Not Found)
+GET https://wengindustries.com/static/js/2.96b47103.chunk.js net::ERR_ABORTED 404 (Not Found)
+GET https://wengindustries.com/static/js/main.b8a0cb65.chunk.js net::ERR_ABORTED 404 (Not Found)
+```
+
+To have the frontend consider the base url, go into `client/package.json` and replace your base path into `/app/app1` appropriately before re-building the frontend:
+```
+"homepage": "/app/app1",
+```
+
+Your next step is typically to re-build the client so that you have `client/build/` files that the production server serves. But if there is a PWA setup in the client, you have extra steps
+
+If there is a `client/public/manifest.json` and/or `client/public/service-worker.js`, you need to adjust 1. when the opened PWA uses the web browser or stay in the PWA window (scope), 2. what's the starting url when the PWA launches (start_url), and 3. location of the service worker needed for PWA:
+- 1. and 2.:
+At `client/public/manifest.json` -
+```
+  "scope": "/app/app1/",
+  "start_url": "/app/app1/",
+```
+- 3. 
+At `client/public/index.html` add your base path to the service worker loader, replacing the example `/app/app1` appropriately -
+```
+window.addEventListener('load', () => {
+  navigator.serviceWorker.register('/app/app1/service-worker.js');
+});
+```
+If you worked on the PWA steps, now you can build the client with: `npm run build`
+
+
+The files needed and modified are:
+.env
+clients/.env
+clients/package.json
+clients/src/App.js
+server/server.js
+
+And if PWA, also modified:
+clients/public/index.html
+clients/public/manifest.json
+
+---
+
 If troubleshooting graphql, note you can open two SSH terminal sessions with same credentials. While one is running the server (unless it’s already running in the background), in any case, see if that port and that endpoint can be reached: 
-curl http://127.0.0.1:3003/graphql-book-search
+curl http://127.0.0.1:3003/graphql-image-gallery-nft-collab
