@@ -22,8 +22,8 @@
         "react-scripts": "3.4.1"
     },
     "scripts": {
-        "start": "nvm use v22.8.0; NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
-        "build": "nvm use v22.8.0; NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+        "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+        "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
