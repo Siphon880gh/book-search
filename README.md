@@ -11,7 +11,7 @@ By Weng Fei Fung. Search books to see their detailed information and save them t
 
 Demo
 ---
-https://book-search-wff.herokuapp.com/
+### [Try it out now](https://wengindustries.com/app/book-search).
 
 Screenshot
 ---
