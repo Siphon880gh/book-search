@@ -10,6 +10,10 @@ Base URL - Here's how you replace the baseURL for this app:
 - Run grep for `/app/book-search/` and replace with your new baseURL. Or you may use sed to match and replace.
 - Run grep for `/app/book-search` and replace with your new baseURL. Or you may use sed to match and replace.
 
+Envs:
+- ./.env
+- ./client/.env
+
 Reverse Proxies:
 - `/app/book-search[/]*` proxy passes to `127.0.0.1:PORT_GRAPHQL` where PORT_GRAPHQL is the unique Express-serving-GraphQL port.
 - `/graphql-book-search[/]*` proxy passes to `127.0.0.1:PORT_GRAPHQL` where PORT_GRAPHQL is the unique Express-serving-GraphQL port.
@@ -60,7 +64,7 @@ Eg.
 
 Start script at remote server:
 - Make sure you built from client/ already
-- From the app root folder: `npm run start:prod` which serves only the `server/server.js` which serves `client/build` files
+- From the app root folder: `npm run start:prod` which runs only the `server/server.js` which serves `client/build` files
 
 ---
 
